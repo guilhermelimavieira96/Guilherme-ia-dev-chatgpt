@@ -254,6 +254,8 @@ function updateSelectedTicket(ticketId) {
 
   if (ticket.correction !== newCorrection && newCorrection) {
     eventList.push(`Correção registrada: ${newCorrection}`);
+  } else if (ticket.correction && !newCorrection) {
+    eventList.push(`Correção removida: ${ticket.correction}`);
   }
 
   ticket.status = newStatus;
