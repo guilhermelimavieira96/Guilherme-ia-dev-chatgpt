@@ -88,7 +88,7 @@ ticketForm.addEventListener("submit", (event) => {
   render();
 });
 
-searchInput.addEventListener("input", renderTicketList);
+searchInput.addEventListener("input", render);
 
 clearData.addEventListener("click", () => {
   localStorage.removeItem(STORAGE_KEY);
@@ -137,6 +137,10 @@ function renderTicketList() {
       ticket.email.toLowerCase().includes(term)
     );
   });
+
+  if (!filteredTickets.some((ticket) => ticket.id === selectedTicketId)) {
+    selectedTicketId = filteredTickets[0]?.id ?? null;
+  }
 
   ticketCounter.textContent = `${filteredTickets.length} chamado${filteredTickets.length === 1 ? "" : "s"}`;
 
