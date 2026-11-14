@@ -30,6 +30,8 @@ de demonstração; não foram usados dados reais de clientes.
 
 ### 1. Busca mostrava um chamado, mas mantinha os detalhes de outro
 
+**Commit da correção:** `eadecfb` — `fix: sincroniza detalhes com a busca`.
+
 **Reprodução:** com Marina selecionada, buscar `Rafael` deixava somente o
 chamado de Rafael na lista, mas o painel de detalhes continuava mostrando o
 chamado de Marina. Uma busca sem resultados também deixava os detalhes antigos
@@ -58,6 +60,8 @@ chamado `1002` de Rafael; buscar um termo inexistente exibiu o estado vazio.
 
 ### 2. Chamado novo recebia ID inválido quando a fila estava vazia
 
+**Commit da correção:** `38c75d5` — `fix: gera id quando a fila esta vazia`.
+
 **Reprodução:** com `serviceDeskTickets` igual a `[]` no armazenamento local,
 enviar um chamado válido mostrava `#-Infinity`; ao persistir em JSON, o ID
 ficava `null`.
@@ -81,6 +85,8 @@ vazia, o navegador exibiu `Chamado #1001 aberto com sucesso`, e o ID salvo no
 armazenamento foi o número `1001`.
 
 ### 3. Dados persistidos em formato inesperado interrompiam a tela
+
+**Commit da correção:** `a17020b` — `fix: recupera fila com dados invalidos`.
 
 **Reprodução:** ao armazenar `{"unexpected":"object"}` em
 `serviceDeskTickets` e recarregar, o app lançava `TypeError: tickets.filter is
