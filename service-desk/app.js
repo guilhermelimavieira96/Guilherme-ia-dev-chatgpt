@@ -132,7 +132,9 @@ function renderTicketList() {
   const filteredTickets = tickets.filter((ticket) => {
     return (
       String(ticket.id).includes(term) ||
-      ticket.title.toLowerCase().includes(term)
+      ticket.title.toLowerCase().includes(term) ||
+      ticket.requester.toLowerCase().includes(term) ||
+      ticket.email.toLowerCase().includes(term)
     );
   });
 
