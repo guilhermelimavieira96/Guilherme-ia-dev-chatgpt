@@ -102,15 +102,29 @@ clearData.addEventListener("click", () => {
 function loadTickets() {
   const stored = localStorage.getItem(STORAGE_KEY);
   if (!stored) {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(seedTickets));
-    return [...seedTickets];
+    return restoreSeedTickets();
   }
 
+  let storedTickets;
   try {
-    return JSON.parse(stored);
-  } catch {
-    return [...seedTickets];
+    storedTickets = JSON.parse(stored);
+  } catch (error) {
+    console.error("Could not parse saved tickets. Restoring sample tickets.", error);
+    return restoreSeedTickets();
   }
+
+  if (!Array.isArray(storedTickets)) {
+    console.error("Saved tickets are not an array. Restoring sample tickets.");
+    return restoreSeedTickets();
+  }
+
+  return storedTickets;
+}
+
+function restoreSeedTickets() {
+  const restoredTickets = [...seedTickets];
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(restoredTickets));
+  return restoredTickets;
 }
 
 function saveTickets() {
